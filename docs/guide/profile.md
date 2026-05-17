@@ -29,7 +29,7 @@ Navigate to **Profile** from the left sidebar.
 | **LinkedIn URL** | Clickable link in CV contact block |
 
 :::tip Add your GitHub
-If you are a developer, your GitHub URL is stored in the system and can appear in CV contact blocks. Make sure to fill it in once the field is available in the UI (see [Gap Report](../dev/gap-report)).
+If you are a developer, your GitHub URL is stored in the system and can appear in CV contact blocks. Make sure to fill it in once the field is available in the UI.
 :::
 
 ---

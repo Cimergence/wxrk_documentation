@@ -1,6 +1,10 @@
+import 'dotenv/config';
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+
+const showUserGuide    = process.env.WXRK_SHOW_USER_GUIDE          !== 'false';
+const showDevDocs      = process.env.WXRK_SHOW_DEV_DOCS             === 'true';
 
 const config: Config = {
   title: 'WXRK Documentation',
@@ -18,6 +22,7 @@ const config: Config = {
   projectName: 'wxrk_documentation',
 
   onBrokenLinks: 'warn',
+  customFields: { showDevDocs },
   markdown: {
     hooks: {
       onBrokenMarkdownLinks: 'warn',
@@ -36,6 +41,10 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           routeBasePath: '/',
+          exclude: [
+            ...(showDevDocs ? [] : ['dev/**']),
+            ...(showUserGuide ? [] : ['guide/**', 'tutorial/**']),
+          ],
         },
         blog: false,
         theme: {
@@ -52,29 +61,29 @@ const config: Config = {
     navbar: {
       title: 'WXRK Docs',
       items: [
-        {
-          type: 'docSidebar',
+        ...(showUserGuide ? [{
+          type: 'docSidebar' as const,
           sidebarId: 'mainSidebar',
-          position: 'left',
+          position: 'left' as const,
           label: 'User Guide',
-        },
-        {
-          type: 'docSidebar',
+        }] : []),
+        ...(showDevDocs ? [{
+          type: 'docSidebar' as const,
           sidebarId: 'devSidebar',
-          position: 'left',
+          position: 'left' as const,
           label: 'For Developers',
-        },
+        }] : []),
         {
-          href: 'https://github.com/wxrk',
+          href: 'https://github.com/Cimergence/wxrk_documentation',
           label: 'GitHub',
-          position: 'right',
+          position: 'right' as const,
         },
       ],
     },
     footer: {
       style: 'dark',
       links: [
-        {
+        ...(showUserGuide ? [{
           title: 'User Guide',
           items: [
             { label: 'Getting Started', to: '/getting-started' },
@@ -82,15 +91,15 @@ const config: Config = {
             { label: 'Technical Review', to: '/guide/technical-review' },
             { label: 'Generate CV & Cover Letter', to: '/guide/generate' },
           ],
-        },
-        {
+        }] : []),
+        ...(showDevDocs ? [{
           title: 'Developers',
           items: [
             { label: 'Architecture Overview', to: '/dev/architecture' },
             { label: 'API Reference', to: '/dev/api-reference' },
             { label: 'Gap Report', to: '/dev/gap-report' },
           ],
-        },
+        }] : []),
       ],
       copyright: `Copyright © ${new Date().getFullYear()} WXRK. Built with Docusaurus.`,
     },

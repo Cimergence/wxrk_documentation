@@ -9,6 +9,7 @@ import styles from './index.module.css';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
+  const showDevDocs = siteConfig.customFields?.showDevDocs as boolean;
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
@@ -22,12 +23,14 @@ function HomepageHeader() {
             to="/getting-started">
             Candidate Guide
           </Link>
-          <Link
-            className="button button--outline button--secondary button--lg"
-            to="/dev/architecture"
-            style={{marginLeft: '1rem'}}>
-            Developer Docs
-          </Link>
+          {showDevDocs && (
+            <Link
+              className="button button--outline button--secondary button--lg"
+              to="/dev/architecture"
+              style={{marginLeft: '1rem'}}>
+              Developer Docs
+            </Link>
+          )}
         </div>
       </div>
     </header>
@@ -51,6 +54,7 @@ const features = [
 
 export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
+  const showDevDocs = siteConfig.customFields?.showDevDocs as boolean;
   return (
     <Layout
       title={siteConfig.title}
@@ -73,7 +77,9 @@ export default function Home(): ReactNode {
               <div className="col col--6 col--offset-3 text--center">
                 <Heading as="h2">Where to start</Heading>
                 <p>New to WXRK? Follow the <Link to="/tutorial/full-flow">Full Candidate Flow Tutorial</Link> for a step-by-step walkthrough.</p>
-                <p>Developer? Check the <Link to="/dev/gap-report">Gap Report</Link> for a prioritised list of backend work needed to close the frontend/backend gap.</p>
+                {showDevDocs && (
+                  <p>Developer? Check the <Link to="/dev/gap-report">Gap Report</Link> for a prioritised list of backend work needed to close the frontend/backend gap.</p>
+                )}
               </div>
             </div>
           </div>

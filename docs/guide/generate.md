@@ -83,7 +83,7 @@ Once generated, the CV and cover letter appear in separate tabs on the applicati
 Click **Export PDF** to download a formatted PDF of the CV or cover letter.
 
 :::info PDF generation
-PDFs are generated server-side using WeasyPrint. If you encounter rendering issues (fonts, layout), see the [Gap Report](../dev/gap-report) for known limitations.
+PDFs are generated server-side using WeasyPrint. If you encounter rendering issues (fonts, layout), contact the development team.
 :::
 
 ---
