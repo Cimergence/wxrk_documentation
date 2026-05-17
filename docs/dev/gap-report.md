@@ -5,7 +5,9 @@ sidebar_label: ⚠️ Gap Report
 
 # Gap Report
 
-This document lists all identified gaps between the frontend and backend as of **2026-05-17**. Each gap blocks a user-visible feature or silently causes degraded output.
+This document lists all identified gaps between the frontend and backend. Each gap blocks a user-visible feature or silently causes degraded output.
+
+**Last updated:** 2026-05-17. Resolved gaps are marked ✅ and kept for reference.
 
 Gaps are prioritised as **P0** (blocks core flow), **P1** (feature broken), or **P2** (degraded UX).
 
@@ -13,12 +15,12 @@ Gaps are prioritised as **P0** (blocks core flow), **P1** (feature broken), or *
 
 ## Summary
 
-| Priority | Count |
-|---|---|
-| P0 — Core flow blocked | 4 |
-| P1 — Feature broken | 12 |
-| P2 — Degraded UX / missing polish | 6 |
-| **Total** | **22** |
+| Priority | Open | Resolved |
+|---|---|---|
+| P0 — Core flow blocked | 4 | 0 |
+| P1 — Feature broken | 12 | 0 |
+| P2 — Degraded UX / missing polish | 3 | 3 |
+| **Total** | **19** | **3** |
 
 ---
 
@@ -459,19 +461,19 @@ Or update the frontend to use the existing single endpoint and derive the KPIs c
 
 ---
 
-### GAP-18 · Profile `github_url` not in frontend form
+### ✅ GAP-18 · Profile `github_url` not in frontend form — RESOLVED
 
-**Backend** has `github_url` on `CandidateProfile`, but the frontend profile form does not expose it.
+**Was:** Backend had `github_url` on `CandidateProfile`, but the frontend profile form did not expose it.
 
-**Fix (Frontend):** Add a GitHub URL input field in the Online Presence section of `profile/page.tsx`. Map it to `profileApi.update({ github_url: value })`.
+**Resolved 2026-05-17:** GitHub URL input added to the Online Presence section of `profile/page.tsx`. Value is saved via `profileApi.update({ github_url })`.
 
 ---
 
-### GAP-19 · Profile `summary` and `years_experience` not exposed
+### ✅ GAP-19 · Profile `summary` and `years_experience` not exposed — RESOLVED
 
-**Backend** has `summary` (TextField) and `years_experience` (int) on `CandidateProfile`. These are not surfaced in the frontend profile form.
+**Was:** Backend had `summary` (TextField) and `years_experience` (int) on `CandidateProfile`. These were not surfaced in the frontend profile form.
 
-**Fix (Frontend):** Add a "Professional Summary" textarea and a "Years of experience" number input to the Profile page. Both are useful inputs for CV generation quality.
+**Resolved 2026-05-17:** Professional Summary textarea and Years of experience number input added to the Profile page. Both are saved via `profileApi.update({ summary, years_experience })`.
 
 ---
 
@@ -508,11 +510,11 @@ jp_score = models.PositiveSmallIntegerField(default=50)
 
 ---
 
-### GAP-22 · Avatar `Remove` button has no API call
+### ✅ GAP-22 · Avatar `Remove` button has no API call — RESOLVED
 
-**Frontend** shows a **Remove** button next to the avatar in the profile page. The button renders but has no `onClick` handler — it is a UI stub.
+**Was:** Frontend showed a **Remove** button with no `onClick` handler — a UI stub.
 
-**Fix (Frontend):** Wire the button to `profileApi.update({ avatar: null })` or a dedicated `DELETE /api/profile/avatar/` endpoint.
+**Resolved 2026-05-17:** `profileApi.removeAvatar()` added (`DELETE /profile/avatar/`) and wired to the Remove button in `profile/page.tsx`.
 
 ---
 
@@ -532,15 +534,15 @@ For a team starting from scratch on the backend gaps:
 10. **GAP-12 + GAP-13** — Interviewer name + completeness
 11. **GAP-14** — CV / LinkedIn import
 12. **GAP-15 + GAP-16** — Dashboard API + generate endpoint
-13. **GAP-17 through GAP-22** — Polish items
+13. **GAP-17, GAP-20, GAP-21** — Remaining polish items
 
 ---
 
 ## Frontend-only fixes (no backend needed)
 
-| Gap | Change |
-|---|---|
-| GAP-18 | Add `github_url` field to profile form |
-| GAP-19 | Add `summary` and `years_experience` fields to profile form |
-| GAP-22 | Wire avatar Remove button |
-| GAP-16 | Update frontend API calls to use correct backend endpoint names |
+| Gap | Change | Status |
+|---|---|---|
+| ~~GAP-18~~ | ~~Add `github_url` field to profile form~~ | ✅ Done |
+| ~~GAP-19~~ | ~~Add `summary` and `years_experience` fields to profile form~~ | ✅ Done |
+| ~~GAP-22~~ | ~~Wire avatar Remove button + add `removeAvatar()` API method~~ | ✅ Done |
+| GAP-16 | Update frontend API calls to use correct backend endpoint names | Open |

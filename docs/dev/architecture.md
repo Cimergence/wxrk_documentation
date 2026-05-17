@@ -5,6 +5,19 @@ sidebar_label: Architecture
 
 # Architecture Overview
 
+## Terminology
+
+Two terms appear throughout the codebase and are easy to conflate:
+
+| Term | Layer | Meaning |
+|---|---|---|
+| **User** | Auth | The `django.contrib.auth.User` record. Handles login, password, and session. One exists for every registered account. |
+| **Candidate** | Domain | The `CandidateProfile` record linked 1:1 to a User. Holds everything job-application related: personal details, MBTI, experiences, and applications. |
+
+**Rule of thumb:** authentication code says "user"; business logic says "candidate". A candidate *is* a user, but the domain model never stores auth concerns, and the auth model never stores CV data.
+
+---
+
 ## Stack
 
 | Layer | Technology |

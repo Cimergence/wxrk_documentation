@@ -27,9 +27,17 @@ Navigate to **Profile** from the left sidebar.
 | Field | Used for |
 |---|---|
 | **LinkedIn URL** | Clickable link in CV contact block |
+| **GitHub URL** | Contact block on generated CVs — especially relevant for engineering roles |
 
-:::tip Add your GitHub
-If you are a developer, your GitHub URL is stored in the system and can appear in CV contact blocks. Make sure to fill it in once the field is available in the UI.
+### Professional details
+
+| Field | Used for |
+|---|---|
+| **Years of experience** | Helps the AI calibrate seniority and emphasis in the CV |
+| **Professional summary** | Seed text for the CV summary section — the AI can refine it or write from scratch if left blank |
+
+:::tip Fill in your summary
+Even a rough 2–3 sentence draft is better than nothing. The AI uses it as a starting point and will tailor it to the specific job. If you leave it blank, the AI writes the summary entirely from your Technical Review.
 :::
 
 ---

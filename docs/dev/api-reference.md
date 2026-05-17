@@ -50,7 +50,7 @@ Refresh an expired access token.
 
 ### `GET /api/profiles/`
 
-List the authenticated user's candidate profile.
+List the authenticated candidate's profile.
 
 **Response:**
 ```json
@@ -81,7 +81,7 @@ Update a candidate profile.
 
 ### `GET /api/mbti-profiles/`
 
-Get the user's MBTI profile.
+Get the candidate's MBTI profile.
 
 **Response:**
 ```json
@@ -111,7 +111,7 @@ Update MBTI type and preferences.
 
 ### `GET /api/technical-reviews/`
 
-List technical reviews for the authenticated user.
+List technical reviews for the authenticated candidate.
 
 ### `POST /api/technical-reviews/`
 
@@ -128,7 +128,7 @@ Create a technical review.
 
 ### `GET /api/skill-assessments/`
 
-List skill assessments for the user's technical reviews.
+List skill assessments for the candidate's technical reviews.
 
 ### `POST /api/skill-assessments/`
 
@@ -171,7 +171,7 @@ Add a project experience.
 
 ### `GET /api/applications/`
 
-List all job applications for the authenticated user.
+List all job applications for the authenticated candidate.
 
 **Query parameters:**
 - `status` — filter by status
