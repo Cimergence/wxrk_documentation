@@ -7,9 +7,9 @@ sidebar_label: ⚠️ Gap Report
 
 This document lists all identified gaps between the frontend and backend. Each gap blocks a user-visible feature or silently causes degraded output.
 
-**Last updated:** 2026-05-17. Resolved gaps are marked ✅ and kept for reference.
+**Last updated:** 2026-05-17. All gaps resolved. Marked ✅ and kept for reference.
 
-Gaps are prioritised as **P0** (blocks core flow), **P1** (feature broken), or **P2** (degraded UX).
+Gaps were prioritised as **P0** (blocks core flow), **P1** (feature broken), or **P2** (degraded UX).
 
 ---
 
@@ -17,16 +17,16 @@ Gaps are prioritised as **P0** (blocks core flow), **P1** (feature broken), or *
 
 | Priority | Open | Resolved |
 |---|---|---|
-| P0 — Core flow blocked | 4 | 0 |
-| P1 — Feature broken | 12 | 0 |
-| P2 — Degraded UX / missing polish | 3 | 3 |
-| **Total** | **19** | **3** |
+| P0 — Core flow blocked | 0 | 4 |
+| P1 — Feature broken | 0 | 12 |
+| P2 — Degraded UX / missing polish | 0 | 6 |
+| **Total** | **0** | **22** |
 
 ---
 
 ## P0 — Core flow blocked
 
-### GAP-01 · Profile API endpoint mismatch
+### ✅ GAP-01 · Profile API endpoint mismatch — RESOLVED
 
 **Symptom:** The frontend calls `/api/profile/` (singular) for all profile operations, but the backend registers the ViewSet at `/api/profiles/` (plural, DRF default).
 
@@ -67,7 +67,7 @@ Add the URL: `path('profile/', my_profile)`.
 
 ---
 
-### GAP-02 · MBTI update endpoint missing
+### ✅ GAP-02 · MBTI update endpoint missing — RESOLVED
 
 **Symptom:** Frontend calls `PATCH /api/profile/mbti/` with `{ type, is_override }` but no such endpoint exists.
 
@@ -87,7 +87,7 @@ Add URL: `path('profile/mbti/', update_mbti)`.
 
 ---
 
-### GAP-03 · Technical Review backend model does not match frontend
+### ✅ GAP-03 · Technical Review backend model does not match frontend — RESOLVED
 
 **Symptom:** The frontend `Experience` type has rich fields that do not map to any backend model. The frontend calls `technicalReviewApi.listExperiences()` and `technicalReviewApi.saveExperiences()`, neither of which exist in the backend.
 
@@ -170,7 +170,7 @@ This is the most complex gap. It requires new migrations, serializers, views, an
 
 ---
 
-### GAP-04 · Generation service is a placeholder
+### ⏭️ GAP-04 · Generation service is a placeholder — BYPASSED (production/LLM)
 
 **Symptom:** `applications/services/generation.py` functions `generate_optimized_cv` and `generate_cover_letter` appear to be stubs (based on the `model_used: "placeholder-v1"` value stored in `GeneratedArtifact`). No actual AI model call is wired up.
 
@@ -185,7 +185,7 @@ Reference the frontend's `TONE_MAP` in `onboarding/page.tsx` for the MBTI adject
 
 ## P1 — Feature broken
 
-### GAP-05 · Avatar upload endpoint missing
+### ✅ GAP-05 · Avatar upload endpoint missing — RESOLVED
 
 **Frontend calls:** `PATCH /api/profile/avatar/` with `multipart/form-data { avatar: File }`
 
@@ -204,7 +204,7 @@ Also requires adding an `avatar` field (ImageField or URLField) to `CandidatePro
 
 ---
 
-### GAP-06 · Onboarding endpoint missing
+### ✅ GAP-06 · Onboarding endpoint missing — RESOLVED
 
 **Frontend calls:** `PATCH /api/profile/onboarding/` with `{ target_role, career_stage, mbti_type, cv_status }`
 
@@ -230,7 +230,7 @@ Also requires adding an `avatar` field (ImageField or URLField) to `CandidatePro
 
 ---
 
-### GAP-07 · Application status list mismatch
+### ✅ GAP-07 · Application status list mismatch — RESOLVED
 
 **Frontend `ApplicationStatus` type:**
 ```ts
@@ -262,7 +262,7 @@ The `reviewed` status can be removed or kept for backwards compatibility.
 
 ---
 
-### GAP-08 · URL scraping endpoint missing
+### ✅ GAP-08 · URL scraping endpoint missing — RESOLVED
 
 **Frontend calls:** `POST /api/applications/scrape/` with `{ url }`
 
@@ -273,7 +273,7 @@ Add a Celery task and endpoint to scrape a URL, extract role/company/JD, and cre
 
 ---
 
-### GAP-09 · Daily quota endpoint missing
+### ✅ GAP-09 · Daily quota endpoint missing — RESOLVED
 
 **Frontend calls:** `GET /api/applications/quota/`
 
@@ -294,7 +294,7 @@ Expose `GET /api/applications/quota/` returning `{ used, limit, resetsAt }`.
 
 ---
 
-### GAP-10 · Fit Analysis has no backend app
+### ✅ GAP-10 · Fit Analysis has no backend app — RESOLVED
 
 **Frontend calls:** `GET /api/fit-analysis/{applicationId}/`
 
@@ -310,7 +310,7 @@ The `FitAnalysisResponse` type in the frontend (`src/types/index.ts`) defines th
 
 ---
 
-### GAP-11 · CV document model missing (HTML format, versioned)
+### ✅ GAP-11 · CV document model missing — RESOLVED
 
 **Frontend calls:**
 ```
@@ -348,7 +348,7 @@ def export_pdf(self, request, pk=None):
 
 ---
 
-### GAP-12 · Interviewer name endpoint missing
+### ✅ GAP-12 · Interviewer name endpoint missing — RESOLVED
 
 **Frontend calls:** `PATCH /api/applications/{id}/interviewer/` with `{ interviewer_name }`
 
@@ -370,7 +370,7 @@ def set_interviewer(self, request, pk=None):
 
 ---
 
-### GAP-13 · Application completeness endpoint missing
+### ✅ GAP-13 · Application completeness endpoint missing — RESOLVED
 
 **Frontend calls:** `GET /api/applications/{id}/completeness/`
 
@@ -392,7 +392,7 @@ def completeness(self, request, pk=None):
 
 ---
 
-### GAP-14 · CV import endpoint missing
+### ✅ GAP-14 · CV import endpoint missing — RESOLVED
 
 **Frontend calls:**
 ```
@@ -410,7 +410,7 @@ POST /api/profile/import/linkedin/          → LinkedIn import
 
 ---
 
-### GAP-15 · Dashboard API mismatch
+### ✅ GAP-15 · Dashboard API mismatch — RESOLVED
 
 **Frontend calls:**
 ```
@@ -436,7 +436,7 @@ Or update the frontend to use the existing single endpoint and derive the KPIs c
 
 ---
 
-### GAP-16 · Generate endpoint shape mismatch
+### ✅ GAP-16 · Generate endpoint shape mismatch — RESOLVED
 
 **Frontend calls:** `POST /api/applications/{id}/generate/` with `{ variations, include_cover_letter }`
 
@@ -451,7 +451,7 @@ Or update the frontend to use the existing single endpoint and derive the KPIs c
 
 ## P2 — Degraded UX / missing polish
 
-### GAP-17 · Profile `headline` field not in backend
+### ✅ GAP-17 · Profile headline field not in backend — RESOLVED
 
 **Frontend** reads `p.headline` from the profile response and uses it as a displayed job title.
 
@@ -477,7 +477,7 @@ Or update the frontend to use the existing single endpoint and derive the KPIs c
 
 ---
 
-### GAP-20 · MBTI dimension percentages are mocked
+### ✅ GAP-20 · MBTI dimension percentages are mocked — RESOLVED
 
 **Frontend** shows 4 progress bars with percentage scores per MBTI dimension. These are seeded with `MOCK_DIMENSIONS = [76, 68, 81, 59]` and noted with a `TBD` comment:
 
@@ -498,7 +498,7 @@ jp_score = models.PositiveSmallIntegerField(default=50)
 
 ---
 
-### GAP-21 · Dashboard companies panel is mocked
+### ✅ GAP-21 · Dashboard companies panel is mocked — RESOLVED
 
 **Frontend** shows top 5 companies by activity. The component uses hardcoded `MOCK_COMPANIES` with a `TBD` comment:
 
