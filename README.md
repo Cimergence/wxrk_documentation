@@ -24,6 +24,11 @@ yarn build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
+## Run locally
+
+Use `
+` command to test your build locally.
+
 ## Deployment
 
 Using SSH:
